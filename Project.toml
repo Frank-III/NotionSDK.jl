@@ -1,0 +1,9 @@
+name = "notion_sdk_jl"
+uuid = "b75c6a16-0e8c-4f76-b2fb-f6cbabf6d82b"
+authors = ["FrankWang <jiangda2@illinois.edu>"]
+version = "0.1.0"
+
+[deps]
+EasyConfig = "acab07b0-f158-46d4-8913-50acef6d41fe"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
