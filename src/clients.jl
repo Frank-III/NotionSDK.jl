@@ -1,14 +1,14 @@
 include("utils.jl")
 
 # switch to EasyConfig
-@with_kw struct ClientOptions
-	#auth::String = nothing
-	#notion_version::String = "2022-06-28"
-	#conten_type::String = "application/json" # seems to be important
-	header::Config = Config(auth=nothing, notion_version="2022-06-28", conten_type="application/json")
-	base_url::String = "https://api.notion.com/v1/"
-	timeout_ms::Int = 60_000
-end
+# @with_kw struct ClientOptions
+# 	#auth::String = nothing
+# 	#notion_version::String = "2022-06-28"
+# 	#conten_type::String = "application/json" # seems to be important
+# 	header::Config = Config(auth=nothing, notion_version="2022-06-28", content_type="application/json")
+# 	base_url::String = "https://api.notion.com/v1/"
+# 	timeout_ms::Int = 60_000
+# end
 
 # would probablity move to utils
 const HEADER_NAME = ["Authorization", "Notion-Version", "Content-Type"] # shoule we set HADER_NAME?
@@ -20,7 +20,7 @@ end
 abstract type BaseClient end
 
 struct Client
-  header::Config = Config(auth=nothing, notion_version="2022-06-28", conten_type="application/json")
+    header::Config = Config(auth=nothing, notion_version="2022-06-28", conten_type="application/json")
 	base_url::String = "https://api.notion.com/v1/"
 	timeout_ms::Int = 60_000
 	#log_level::Int= nothing
