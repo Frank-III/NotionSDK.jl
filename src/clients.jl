@@ -13,28 +13,26 @@ include("utils.jl")
 # would probablity move to utils
 const HEADER_NAME = ["Authorization", "Notion-Version", "Content-Type"] # shoule we set HADER_NAME?
 
-function _parse_header(headers::Config)
-    return HEADER_NAME .=> collect(values(headers))
-end
+#function _parse_header(headers::Config)
+#    return HEADER_NAME .=> collect(values(headers))
+#end
 
 abstract type BaseClient end
 
 struct Client
-    header::Config = Config(auth=nothing, notion_version="2022-06-28", conten_type="application/json")
-	base_url::String = "https://api.notion.com/v1/"
-	timeout_ms::Int = 60_000
+    header::Config
+	base_url::String
+	timeout_ms::Int
 	#log_level::Int= nothing
 	#check: if this work?
-	function Client(auth::String)
-		c = new()
-		c.header.auth = auth
-		return c
+	function Client(auth::String=nothing)
+		new(Config(auth=auth, notion_version="2022-06-28", content_type="application/json"),"https://api.notion.com/v1/", 60_000)
 	end
 end
 
 
 function _build_request(client::BaseClient, method::String, path::String; body, query, auth=nothing)
-	auth && client.header.auth = "Bearer $(auth)"
+	auth && (client.header.auth = "Bearer $(auth)")
 	() -> HTTP.request(method, client.base_url * path ,_parse_header(client.header), body=Dict(body...), query=query)
 end
 
@@ -56,7 +54,7 @@ end
 
 function list_users(notion::BaseClient; kwargs...)
 	make_request(notion, "GET", "users";
-							query= pick(kwargs, :start_cursor, :page_size);
+							query= pick(kwargs, :start_cursor, :page_size),
 							auth=get_auth(kwargs))
 end
 
@@ -153,6 +151,7 @@ function update_block(notion::BaseClient, block_id::String; kwargs...)
 							:table
 							),
 							auth=get_auth(kwargs))
+end
 
 
 
@@ -166,5 +165,5 @@ function update_block(notion::BaseClient, block_id::String; kwargs...)
 
 
 struct AsyncClient
-	options::ClientOptions
+	pass
 end
