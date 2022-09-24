@@ -1,4 +1,4 @@
-# Notion_SDK_JL.jl(WIP)
+# Notion_SDK_JL.jl
 notion-sdk-jl is a simple and easy to use client library for the official [Notion API](https://developers.notion.com/).
 
 What is worked: 
