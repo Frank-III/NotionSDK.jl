@@ -14,7 +14,7 @@ function parse_input1(name; kwargs...)
     sorts = [Config()]
     sorts[1].property = "Name"
     sorts[1].direction = "ascending"
-    query_databases(notion, database_id; filter=filter, sorts=sorts)
+    query_databases(notion, database_id; filter = filter, sorts = sorts)
 end
 
 database_page = parse_input1("Lux.jl")
@@ -24,9 +24,9 @@ database_page = parse_input1("Lux.jl")
 
 function parse_input2(name; kwargs...)
     filter = Dict(Dict(:property => "Name", :title => Dict(:equals => "$name")))
-    sorts = [Dict(:property=>"Name", :direction=>"ascending")]
+    sorts = [Dict(:property => "Name", :direction => "ascending")]
     #pick(f(;filter=filter, sorts=sorts), :filter, :sorts)
-    query_databases(notion, database_id; filter=filter, sorts=sorts)
+    query_databases(notion, database_id; filter = filter, sorts = sorts)
 end
 
 database_page2 = parse_input2("Lux.jl")
