@@ -107,7 +107,6 @@ function update_databases(notion::BaseClient, database_id::String; kwargs...)
 		auth=get_auth(kwargs))
 end
 
-
 ## Block Functions
 retrieve_block(notion::BaseClient, block_id::String; kwargs...) = make_request(notion, "GET", "blocks/$(block_id)"; auth=get_auth(kwargs))
 
