@@ -1,5 +1,5 @@
-# Notion_SDK_JL.jl
-notion-sdk-jl is a simple and easy to use client library for the official [Notion API](https://developers.notion.com/).(Havily inspired by [notion-sdk-py](https://github.com/ramnes/notion-sdk-py))
+# NotionSDK.jl
+NotionSDK is a simple and easy to use client library for the official [Notion API](https://developers.notion.com/).(Havily inspired by [notion-sdk-py](https://github.com/ramnes/notion-sdk-py))
 
 What is worked: 
 1. each api in notion website is worked, except some was deprecated.
@@ -43,7 +43,7 @@ filter = Config()
 filter.property = "Name"
 filter.title.equals = some_name
 print(filter)
-sort_1 = [Config()]
+sort_1 = Config()
 sort_1.property = "Name"
 sort_1.direction = "ascending"
 query_databases(notion, database_id; filter=filter, sorts=[sort_1])
