@@ -1,4 +1,4 @@
-name = "notion_sdk_jl"
+name = "NotionSDK"
 uuid = "b75c6a16-0e8c-4f76-b2fb-f6cbabf6d82b"
 authors = ["FrankWang <jiangda2@illinois.edu>"]
 version = "0.1.0"
