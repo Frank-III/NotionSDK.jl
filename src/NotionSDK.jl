@@ -14,7 +14,7 @@ export
 	create_page, retrieve_page, retrieve_page_properties, update_page,
 	list_databases, query_databases, retrieve_databases, create_databases,update_databases,
 	retrieve_block, update_block,
-    list_block_children, append_block_children,
+	list_block_children, append_block_children,
 	search,
 	create_comment, list_comments
 end # module NotionSDK
