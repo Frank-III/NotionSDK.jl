@@ -95,13 +95,13 @@ end
 
 function query_databases(notion::BaseClient, database_id::String; kwargs...)
 	make_request(notion, "POST", "databases/$(database_id)/query";
-        body=pick(kwargs, :filter, :sort, :start_cursor, :page_size),
+        body=pick(kwargs, :filter, :sorts, :start_cursor, :page_size),
         auth=get_auth(kwargs))
 end
 
 function retrieve_databases(notion::BaseClient, database_id::String; kwargs...)
 	make_request(notion, "POST", "databases/$(database_id)/query";
-        body=pick(kwargs, :filter, :sort, :start_cursor, :page_size),
+        body=pick(kwargs, :filter, :sorts, :start_cursor, :page_size),
         auth=get_auth(kwargs))
 end
 
@@ -119,7 +119,7 @@ end
 
 
 ## Block Functions
-retrieve_block(notion::BaseClient, block_id::String; kwargs...) = make_request(notion, "GET", "block/$(block_id)"; auth=get_auth(kwargs))
+retrieve_block(notion::BaseClient, block_id::String; kwargs...) = make_request(notion, "GET", "blocks/$(block_id)"; auth=get_auth(kwargs))
 
 function update_block(notion::BaseClient, block_id::String; kwargs...)
 	make_request(notion, "PATCH", "blocks/$(block_id)";
@@ -180,13 +180,13 @@ function search(notion::BaseClient, block_id::String; kwargs...)
 end
 
 ## Comment function
-function create_comment(notion::BaseClients; kwargs...)
+function create_comment(notion::BaseClient; kwargs...)
     make_request(notion, "POST", "comments";
         query=pick(kwargs, :parent, :discussion_id, :rich_text),
         auth=get_auth(kwargs))
 end
 
-function list_comments(notion::BaseClients; kwargs...)
+function list_comments(notion::BaseClient; kwargs...)
     make_request(notion, "GET", "comments";
     query=pick(kwargs, :block_id, :start_cursor, :page_size),
     auth=get_auth(kwargs))

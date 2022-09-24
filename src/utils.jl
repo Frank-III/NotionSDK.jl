@@ -4,7 +4,7 @@
 
 
 function pick(base, keyvars::Symbol...)
-    res = [base[key] for key in keyvars if (key ∈ keys(base)) && (base[key] ≠ nothing)]
+    res = [key => base[key] for key in keyvars if (key ∈ keys(base)) && (base[key] ≠ nothing)]
     Dict(res...)
 end
 
