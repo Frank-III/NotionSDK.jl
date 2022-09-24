@@ -1,8 +1,15 @@
 # Notion_SDK_JL.jl(WIP)
 notion-sdk-jl is a simple and easy to use client library for the official [Notion API](https://developers.notion.com/).
 
-Still working on it.
-Currently: The return is HTTP request results, should parse the result and return json or dict, and the `Base.show` for client should be dispatched. (TO DO)
+What is worked: 
+1. each api in notion website is worked, except some was deprecated.
+2. the `body` or `query` should be inputted as `Dictionary` or a `Config` from `EasyConfig.jl`.
+3. The return is `JSON3.Object` or `JSON3.Array` depends on the function calls.
+
+Should Improved (TO DO):
+1. The `Base.show` for client should be dispatched.
+2. simplify the Exception message. 
+3. add some explanation in the code.
 
 ## Basic Examples
 ### SetUps

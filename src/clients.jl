@@ -30,6 +30,9 @@ struct Client <: BaseClient
 	end
 end
 
+#function Base.show(io, Client::BaseClient)
+#end
+
 
 function _build_request(client::BaseClient, method::String, path::String; body, query, auth)
 	!isnothing(auth) && (client.header.auth = "Bearer $(auth)")
@@ -39,15 +42,16 @@ function _build_request(client::BaseClient, method::String, path::String; body, 
 end
 
 function make_request(client::BaseClient, method::String, path::String; body=Dict(), query=Dict(), auth=nothing)
-	#try
-	response = _build_request(client, method, path; body=body, query=query, auth=auth)()
-	#catch
-		#pass
+	try
+        response = _build_request(client, method, path; body=body, query=query, auth=auth)()
+        return _parse_response(response)
+	catch e
+		return HTTP.Response(400, "Error: $e")
 	#end
-	_parse_response(response)
+    end
 end
 
-_parse_response(response) = response
+_parse_response(response) = JSON3.read(response.body)
 
 
 ## User Functions
