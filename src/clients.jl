@@ -33,7 +33,6 @@ function make_request(client::BaseClient, method::String, path::String; body=Dic
 		return _parse_response(response)
 	catch e
 		return HTTP.Response(400, "Error: $e")
-	#end
     end
 end
 
