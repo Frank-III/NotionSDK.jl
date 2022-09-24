@@ -1,9 +1,9 @@
 # test api
-@test typeof(list_users(notion)) == JSON3.Object
-@test typeof(get_me(notion)) == JSON3.Object
-@test retrieve_user(notion, user_id) == JSON3.Object
+@test list_users(notion) isa JSON3.Object
+@test get_me(notion) isa JSON3.Object
+@test retrieve_user(notion, user_id) isa JSON3.Object
 page_ = retrieve_page(notion, page_id)
-@test typeof(page_) == JSON3.Object
+@test page_ isa JSON3.Object
 @test page_[:object] == "page"
 
 function parse_input1(name; kwargs...)
@@ -18,9 +18,9 @@ function parse_input1(name; kwargs...)
 end
 
 database_page = parse_input1("Lux.jl")
-@test database_page[:object] = "list"
-@test typeof(database_page) == JSON3.Object
-@test database_page[:results] == JSON3.Array
+@test database_page[:object] == "list"
+@test database_page isa JSON3.Object
+@test database_page[:results] isa JSON3.Array
 
 function parse_input2(name; kwargs...)
     filter = Dict(Dict(:property => "Name", :title => Dict(:equals => "$name")))
@@ -30,10 +30,10 @@ function parse_input2(name; kwargs...)
 end
 
 database_page2 = parse_input2("Lux.jl")
-@test database_page[:object] = "list"
-@test typeof(database_page2) == JSON3.Object
-@test database_page2[:results] == JSON3.Array
+@test database_page[:object] == "list"
+@test database_page2 isa JSON3.Object
+@test database_page2[:results] isa JSON3.Array
 
 data_base_empty = parse_input2("NotionSDK.jl")
-@test typeof(database_page2) == JSON3.Object
-@test isempty(database_page2[:results]) == true
+@test database_page2 isa JSON3.Object
+@test database_page2[:results] isa JSON3.Array
