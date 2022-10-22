@@ -78,7 +78,7 @@ end
 
 function parse_md(math::Markdown.LaTeX; inline=false, indent=1, kwargs...)
     #have to work on the inline and block case
-    indent > 2 && return
+    indent > 2 && inline == false && return
     content = Config(
         type = :equation,
         equation = (; expression = math.formula)
@@ -115,9 +115,23 @@ function parse_md(qt::Markdown.BlockQuote; indent =1, kwargs...)
     NotionBlock{:quote}(content=content)
 end
 
-function (nb::NotionBlock{:numbered_list_item})()
-
+function (nb::NotionBlock{:numbered_list_item})(::Val{true})
+    nb.block[:numbered_list_item].rich_text = nb.content
+    nb.block
 end
+
+
+function (nb::NotionBlock{:bulleted_list_item})(::Val{true})
+    nb.block[:bulleted_list_item].rich_text = nb.content
+    nb.block
+end
+
+@inline islist(nb::NotionBlock) = false
+@inline islist(nb::NotionBlock{:numbered_list_item}) = true
+@inline islist(nb::NotionBlock{:bulleted_list_item}) = true
+
+
+@inline (nb::Config)() = nb
 
 function (nb::NotionBlock{b})() where {b}
     nb.block[b].rich_text = nb.content
